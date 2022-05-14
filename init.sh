@@ -74,6 +74,9 @@ echo "module.exports = {
 echo "*.key*
 *.pem
 config.env
+.vscode/
+.cspell/
+
 # Logs
 logs
 *.log

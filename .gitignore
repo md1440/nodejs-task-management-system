@@ -2,6 +2,7 @@
 *.pem
 config.env
 .vscode/
+.cspell/
 
 # Logs
 logs
