@@ -8,6 +8,7 @@ const validateRequest = (schema: AnyZodObject) => (req: Request, res: Response, 
       query: req.query,
       params: req.params,
     })
+    next();
   } catch (error: any) {
     res.status(400).send(error.message)
   }
