@@ -1,14 +1,14 @@
 import config from 'config';
-import express from 'express';
+import createServer from './utils/createServer';
 import dbConnect from './utils/dbConnect';
 import logger from './utils/logger';
 
 const port = config.get<number>('port');
 
-const app = express();
+const app = createServer();
 
-app.listen(port, async() => {
+app.listen(port, async () => {
 	logger.info(`App is running on ${port}`);
 
-  await dbConnect();
+	await dbConnect();
 });
