@@ -2,7 +2,7 @@ import config from 'config';
 import mongoose from 'mongoose';
 import logger from './logger';
 
-const dbConnectionEvents = () => {
+export const dbConnectionEvents = () => {
   mongoose.connection.on('connecting', () => {
     if (process.env.NODE_ENV === 'development') {
       logger.info('Connecting to DB ...');
