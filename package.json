@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only src/app.ts",
-		"build": "cross-env NODE_ENV=production tsc",
-		"test": "cross-env NODE_ENV=test jest --maxWorkers=50%",
-		"test:watch": "cross-env NODE_ENV=test jest --watchAll --maxWorkers=25%",
-		"coverage": "cross-env NODE_ENV=test jest --coverage"
+    "build": "cross-env NODE_ENV=production tsc",
+    "test": "cross-env NODE_ENV=test jest --maxWorkers=50%",
+    "test:watch": "cross-env NODE_ENV=test jest --watchAll --maxWorkers=25%",
+    "coverage": "cross-env NODE_ENV=test jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +30,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "jest": "^27.5.1",
+    "morgan": "^1.10.0",
     "prettier": "^2.6.2",
     "supertest": "^6.2.2",
     "ts-jest": "^27.1.4",
