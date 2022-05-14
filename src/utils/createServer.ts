@@ -3,6 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import routes from '../routes';
 
 function createServer() {
 	const app = express();
@@ -16,7 +17,7 @@ function createServer() {
 		app.use(morgan('dev'));
 	}
 
-	// routes(app);
+	routes(app);
 
 	return app;
 }
