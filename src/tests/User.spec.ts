@@ -51,7 +51,7 @@ describe('User', () => {
 			it('should return a 409 status', async () => {
 				const createUserServiceMock = jest
 					.spyOn(UserService, 'createUser')
-					.mockRejectedValue('ooops ..');
+					.mockRejectedValue('mockRejectedValue..');
 
 				const { statusCode } = await supertest(app).post('/api/v1/users').send(userInput);
 
