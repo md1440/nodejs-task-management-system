@@ -12,7 +12,7 @@
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"allowSyntheticDefaultImports": true,
-		"outDir": "build/"
+		"outDir": "build"
 	},
 	"include": ["src","config"],
   "exclude": ["node_modules"]

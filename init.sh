@@ -38,7 +38,7 @@ echo "{
         \"esModuleInterop\": true,
         \"resolveJsonModule\": true,
         \"allowSyntheticDefaultImports\": true,
-        \"outDir\": \"build/\"
+        \"outDir\": \"build\"
     },
     \"include\": [\"src\"],
     \"exclude\": [\"node_modules\"]

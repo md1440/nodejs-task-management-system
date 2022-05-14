@@ -5,7 +5,7 @@ specifiers:
   '@types/compression': ^1.7.2
   '@types/config': ^0.0.41
   '@types/cors': ^2.8.12
-  '@types/express': 4.17.3
+  '@types/express': ^4.17.13
   '@types/jest': ^27.4.1
   '@types/jsonwebtoken': ^8.5.8
   '@types/lodash': ^4.14.182
@@ -61,7 +61,7 @@ devDependencies:
   '@types/compression': 1.7.2
   '@types/config': 0.0.41
   '@types/cors': 2.8.12
-  '@types/express': 4.17.3
+  '@types/express': 4.17.13
   '@types/jest': 27.4.1
   '@types/jsonwebtoken': 8.5.8
   '@types/lodash': 4.14.182
@@ -739,7 +739,7 @@ packages:
   /@types/compression/1.7.2:
     resolution: {integrity: sha512-lwEL4M/uAGWngWFLSG87ZDr2kLrbuR8p7X+QZB1OQlT+qkHsCPDVFnHPyXf4Vyl4yDDorNY+mAhosxkCvppatg==}
     dependencies:
-      '@types/express': 4.17.3
+      '@types/express': 4.17.13
     dev: true
 
   /@types/config/0.0.41:
@@ -768,11 +768,12 @@ packages:
       '@types/range-parser': 1.2.4
     dev: true
 
-  /@types/express/4.17.3:
-    resolution: {integrity: sha512-I8cGRJj3pyOLs/HndoP+25vOqhqWkAZsWMEmq1qXy/b/M3ppufecUwaK2/TVDVxcV61/iSdhykUjQQ2DLSrTdg==}
+  /@types/express/4.17.13:
+    resolution: {integrity: sha512-6bSZTPaTIACxn48l50SR+axgrqm6qXFIxrdAKaG6PaJk3+zuUr35hBlgT7vOmJcum+OEaIBLtHV/qloEAFITeA==}
     dependencies:
       '@types/body-parser': 1.19.2
       '@types/express-serve-static-core': 4.17.28
+      '@types/qs': 6.9.7
       '@types/serve-static': 1.13.10
     dev: true
 
