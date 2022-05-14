@@ -5,7 +5,7 @@ import { userInput, userInputIncomplete, userInputInvalidPasswords, userPayload 
 
 const app = createServer();
 
-describe('User', () => {
+describe('User End Point Tests', () => {
 	describe('user registration', () => {
 		describe('given the registration data is complete & valid', () => {
 			it('should call createUserService and return the user payload', async () => {
