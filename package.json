@@ -4,7 +4,11 @@
   "description": "Backend Coding Challenge",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only src/app.ts",
+		"build": "cross-env NODE_ENV=production tsc",
+		"test": "cross-env NODE_ENV=test jest --maxWorkers=50%",
+		"test:watch": "cross-env NODE_ENV=test jest --watchAll --maxWorkers=25%",
+		"coverage": "cross-env NODE_ENV=test jest --coverage"
   },
   "keywords": [],
   "author": "",
