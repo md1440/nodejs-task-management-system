@@ -12,7 +12,7 @@ mkdir src/tests
 mkdir src/utils
 touch .env
 
-pnpm add express helmet compression cors
+pnpm add express helmet compression cors morgan
 pnpm add config cross-env dotenv lodash
 pnpm add bcrypt jsonwebtoken 
 pnpm add mongoose pino pino-pretty zod dayjs
