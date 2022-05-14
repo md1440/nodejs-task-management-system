@@ -1,3 +1,6 @@
+*.key*
+*.pem
+config.env
 # Logs
 logs
 *.log
