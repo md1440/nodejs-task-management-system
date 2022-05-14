@@ -9,6 +9,11 @@ export const userInput = {
   passwordConfirmation: 'asdf1234',
 };
 
+export const userLogin = {
+  email: 'test@test.de',
+  password: 'asdf1234',
+};
+
 export const userPayload = {
 	_id: userId,
 	email: 'test@test.de',
