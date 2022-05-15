@@ -41,7 +41,7 @@ export const userInputIncomplete = {
 export const sessionInput = {
 	_id: userId,
 	userAgent: 'PostmanRuntime/7.28.4',
-}
+};
 
 export const sessionPayload = {
 	_id: new mongoose.Types.ObjectId().toString(),
@@ -65,8 +65,7 @@ export const taskPayload = {
 export const taskPayloadInvalid = {
 	user: userId,
 	title: 'finish optilyz backend coding challenge',
-	description:
-		'too short.',
+	description: 'too short.',
 	dueDate: '2022-05-17T13:31:07.674Z',
 	reminderDate: '2022-05-16T13:31:07.674Z',
 };
