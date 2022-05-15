@@ -52,3 +52,12 @@ export const sessionPayload = {
 	updatedAt: new Date('2022-05-15T13:31:07.674Z'),
 	__v: 0,
 };
+
+export const taskPayload = {
+	user: userId,
+	title: 'finish optilyz backend coding challenge',
+	description:
+		'Please implement a simple task management system with authentication. Please use NodeJS, Express, MongoDB, and Mongoose to implement the solution. You can use e. g. Docker to run MongoDB, and any open source library that you would also be using on the job.',
+	dueDate: '2022-05-17T13:31:07.674Z',
+	reminderDate: '2022-05-16T13:31:07.674Z',
+};
