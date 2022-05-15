@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { CreateTaskInput } from '../schema/Task.schema';
-import { createTask } from '../service/task.service';
+import { CreateTaskInput, GetTaskInput } from '../schema/Task.schema';
+import { createTask, findTask } from '../service/task.service';
 import logger from '../utils/logger';
 
 export async function createTaskHandler(
@@ -17,4 +17,13 @@ export async function createTaskHandler(
 		logger.error(err);
 		res.status(403).send(err.message);
 	}
+}
+
+export async function getTaskHandler(req: Request<GetTaskInput['params']>, res: Response) {
+	const taskId = req.params.taskId;
+	const task = await findTask({ taskId });
+
+	if (!task) return res.status(404).send('Task not found');
+
+	return res.send(task);
 }
