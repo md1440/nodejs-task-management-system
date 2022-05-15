@@ -1,6 +1,8 @@
+import { get } from 'lodash';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import supertest from 'supertest';
+import { createTask } from '../service/task.service';
 import createServer from '../utils/createServer';
 import { signJwt } from '../utils/jwtUtils';
 import { taskPayload, userPayload } from './_test_fixtures';
@@ -55,6 +57,28 @@ describe('Task End Point Tests', () => {
 						__v: 0,
 					})
 				);
+			});
+		});
+	});
+
+	describe('get task route', () => {
+		describe('given the task does not exist', () => {
+			it('should return a 404 status', async () => {
+				const taskId = 'task_asdf';
+
+				await supertest(app).get(`/api/v1/tasks/${taskId}`).expect(404);
+			});
+		});
+
+		describe('given the task does exist', () => {
+			it('should return a 200 status and the task', async () => {
+				const task = await createTask(taskPayload);
+				const taskId = get(task, 'taskId');
+
+				const { body, statusCode } = await supertest(app).get(`/api/v1/tasks/${taskId}`);
+
+				expect(statusCode).toEqual(200);
+				expect(body.taskId).toBe(task.taskId);
 			});
 		});
 	});

@@ -6,10 +6,12 @@ const nanoid = customAlphabet('xyz0123456789', 8);
 
 export interface TaskDocument extends mongoose.Document {
 	user: UserDocument['_id'];
+	taskId: string;
 	title: string;
 	description: string;
 	dueDate: string | Date;
 	reminderDate: string | Date;
+	isCompleted: boolean;
 	createdAt: Date;
 	updatedAt: Date;
 }
