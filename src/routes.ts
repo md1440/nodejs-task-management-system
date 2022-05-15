@@ -1,5 +1,5 @@
 import { Express } from 'express';
-import { createUserSessionHandler, getUserSessionHandler } from './controller/session.controller';
+import { createUserSessionHandler, deleteSessionHandler, getUserSessionHandler } from './controller/session.controller';
 import {
 	createTaskHandler,
 	deleteTaskHandler,
@@ -35,6 +35,12 @@ function routes(app: Express) {
 		'/api/v1/sessions', 
 		requireUser, 
 		getUserSessionHandler
+	);
+
+	app.delete(
+		'/api/v1/sessions',
+		requireUser,
+		deleteSessionHandler
 	);
 
 	app.post(
