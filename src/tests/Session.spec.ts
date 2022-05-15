@@ -2,6 +2,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import supertest from 'supertest';
 import { createUserSessionHandler } from '../controller/session.controller';
+import UserModel from '../models/User.model';
 import * as SessionService from '../service/session.service';
 import { createSession } from '../service/session.service';
 import * as UserService from '../service/user.service';
@@ -22,6 +23,10 @@ describe('Session Endpoint Tests', () => {
 	afterAll(async () => {
 		await mongoose.disconnect();
 		await mongoose.connection.close();
+	});
+
+	afterEach(async () => {
+		await UserModel.deleteOne({ email: 'test@test.de' });
 	});
 
 	describe('given the username and password are valid', () => {
@@ -83,6 +88,26 @@ describe('Session Endpoint Tests', () => {
 						__v: 0,
 					}),
 				])
+			);
+		});
+	});
+
+	describe('given the accessToken is valid & user is logged in', () => {
+		it('should delete the current session', async () => {
+			const user = await createUser(userInput);
+			const session = await createSession(user._id.toString(), 'PostmanRuntime/7.28.4');
+			const jwt = signJwt({ userPayload, _id: `${user._id}` });
+
+			const { body } = await supertest(app)
+				.delete('/api/v1/sessions')
+				.set('Authorization', `Bearer ${jwt}`)
+				.expect(200);
+
+			expect(body).toEqual(
+				expect.objectContaining({
+					accessToken: null,
+					refreshToken: null,
+				})
 			);
 		});
 	});
