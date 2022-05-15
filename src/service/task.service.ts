@@ -1,4 +1,4 @@
-import { DocumentDefinition, FilterQuery, QueryOptions } from 'mongoose';
+import { DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
 import TaskModel, { TaskDocument } from '../models/Task.model';
 
 export async function createTask(
@@ -14,4 +14,12 @@ export async function findTask(
 	options: QueryOptions = { lean: true }
 ) {
 	return TaskModel.findOne(query, {}, options);
+}
+
+export async function findAndUpdateTask(
+	query: FilterQuery<TaskDocument>,
+	update: UpdateQuery<TaskDocument>,
+	options: QueryOptions
+) {
+	return TaskModel.findOneAndUpdate(query, update, options);
 }
