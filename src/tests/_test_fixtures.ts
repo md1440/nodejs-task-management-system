@@ -37,3 +37,18 @@ export const userInputIncomplete = {
 	password: 'asdf1234',
 	passwordConfirmation: 'asdf9876',
 };
+
+export const sessionInput = {
+	_id: userId,
+	userAgent: 'PostmanRuntime/7.28.4',
+}
+
+export const sessionPayload = {
+	_id: new mongoose.Types.ObjectId().toString(),
+	user: userId,
+	valid: true,
+	userAgent: 'PostmanRuntime/7.28.4',
+	createdAt: new Date('2022-05-15T13:31:07.674Z'),
+	updatedAt: new Date('2022-05-15T13:31:07.674Z'),
+	__v: 0,
+};
