@@ -42,7 +42,7 @@ export const deleteTaskSchema = object({
 	...params,
 });
 
-export type CreateTaskSchema = TypeOf<typeof createTaskSchema>;
-export type UpdateTaskSchema = TypeOf<typeof updateTaskSchema>;
-export type GetTaskSchema = TypeOf<typeof getTaskSchema>;
-export type DeleteTaskSchema = TypeOf<typeof deleteTaskSchema>;
+export type CreateTaskInput = TypeOf<typeof createTaskSchema>;
+export type UpdateTaskInput = TypeOf<typeof updateTaskSchema>;
+export type GetTaskInput = TypeOf<typeof getTaskSchema>;
+export type DeleteTaskInput = TypeOf<typeof deleteTaskSchema>;
