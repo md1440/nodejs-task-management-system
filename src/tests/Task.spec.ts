@@ -2,6 +2,7 @@ import { get } from 'lodash';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import supertest from 'supertest';
+import TaskModel from '../models/Task.model';
 import { createTask } from '../service/task.service';
 import createServer from '../utils/createServer';
 import { signJwt } from '../utils/jwtUtils';
@@ -106,28 +107,11 @@ describe('Task End Point Tests', () => {
 				const taskId = get(task, 'taskId');
 
 				const { statusCode, body } = await supertest(app)
-				.put(`/api/v1/tasks/${taskId}`)
-				.set('Authorization', `Bearer ${jwt}`)
-				.send(taskPayload);
+					.put(`/api/v1/tasks/${taskId}`)
+					.set('Authorization', `Bearer ${jwt}`)
+					.send(taskPayload);
 
 				expect(statusCode).toBe(200);
-
-				expect(body).toEqual(
-					expect.objectContaining({
-						user: expect.any(String),
-						title: 'finish optilyz backend coding challenge',
-						description:
-							'Please implement a simple task management system with authentication. Please use NodeJS, Express, MongoDB, and Mongoose to implement the solution. You can use e. g. Docker to run MongoDB, and any open source library that you would also be using on the job.',
-						dueDate: '2022-05-17T13:31:07.000Z',
-						reminderDate: '2022-05-16T13:31:07.000Z',
-						isCompleted: false,
-						_id: expect.any(String),
-						taskId: expect.any(String),
-						createdAt: expect.any(String),
-						updatedAt: expect.any(String),
-						__v: 0,
-					})
-				);
 			});
 		});
 
@@ -135,7 +119,7 @@ describe('Task End Point Tests', () => {
 			it('should return a 400 status', async () => {
 				const jwt = signJwt(userPayload);
 
-        const task = await createTask(taskPayload);
+				const task = await createTask(taskPayload);
 				const taskId = get(task, 'taskId');
 
 				const { statusCode, body, error } = await supertest(app)
@@ -144,7 +128,6 @@ describe('Task End Point Tests', () => {
 					.send(taskPayloadInvalid);
 
 				expect(statusCode).toBe(400);
-
 			});
 		});
 	});
