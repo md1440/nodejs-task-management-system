@@ -1,9 +1,11 @@
+import config from 'config';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import SessionModel from '../models/Session.model';
 import UserModel from '../models/User.model';
-import { createSession } from '../service/session.service';
+import { createSession, reIssueAccessToken } from '../service/session.service';
 import { createUser, validatePassword } from '../service/user.service';
+import { signJwt, verifyJwt } from '../utils/jwtUtils';
 import { userInput, userLogin, userLoginPasswordFalse } from './_test_fixtures';
 
 const userId = new mongoose.Types.ObjectId().toString();
@@ -39,6 +41,30 @@ describe('Services Unit Tests', () => {
 						updatedAt: expect.any(Date),
 						__v: 0,
 					});
+				});
+			});
+		});
+
+		describe('reIssueAccessToken', () => {
+			describe('given a valid refreshToken', () => {
+				it('should create and return a valid accessToken', async () => {
+					const user = await createUser(userInput);
+					const session = await createSession(user._id.toString(), 'PostmanRuntime/7.28.4');
+					const accessToken = signJwt(
+						{ ...user, session: session._id },
+						{ expiresIn: config.get<string>('accessTokenTtl') }
+					);
+
+					const refreshToken = signJwt(
+						{ ...user, session: session._id },
+						{ expiresIn: config.get<string>('refreshTokenTtl') }
+					);
+
+					const newAccessToken = await reIssueAccessToken({ refreshToken });
+
+					const result = verifyJwt(newAccessToken as string);
+
+					expect(result.valid).toEqual(true);
 				});
 			});
 		});
