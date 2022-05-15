@@ -4,7 +4,7 @@ import jwt, { SignOptions } from 'jsonwebtoken';
 const publicKey = config.get<string>('publicKey');
 const privateKey = config.get<string>('privateKey');
 
-export function signJwt(payload: Object, options: SignOptions | undefined) {
+export function signJwt(payload: Object, options?: SignOptions | undefined) {
 	return jwt.sign(payload, privateKey, {
 		...(options && options),
 		algorithm: 'RS256',
