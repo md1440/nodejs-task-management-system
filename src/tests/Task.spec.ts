@@ -2,7 +2,6 @@ import { get } from 'lodash';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import supertest from 'supertest';
-import TaskModel from '../models/Task.model';
 import { createTask } from '../service/task.service';
 import createServer from '../utils/createServer';
 import { signJwt } from '../utils/jwtUtils';
@@ -128,6 +127,33 @@ describe('Task End Point Tests', () => {
 					.send(taskPayloadInvalid);
 
 				expect(statusCode).toBe(400);
+			});
+		});
+	});
+
+	describe('delete task route', () => {
+		describe('given user is logged in and taskId is valid', () => {
+			it('should return a 200 and delete the task', async () => {
+				const jwt = signJwt(userPayload);
+				const task = await createTask(taskPayload);
+				const taskId = get(task, 'taskId');
+
+				const { statusCode, body } = await supertest(app)
+					.delete(`/api/v1/tasks/${taskId}`)
+					.set('Authorization', `Bearer ${jwt}`);
+
+				expect(statusCode).toBe(200);
+			});
+		});
+
+		describe('given user is not logged in and taskId is valid', () => {
+			it('should return a 200 and delete the task', async () => {
+				const task = await createTask(taskPayload);
+				const taskId = get(task, 'taskId');
+
+				const { statusCode, body } = await supertest(app).delete(`/api/v1/tasks/${taskId}`);
+
+				expect(statusCode).toBe(403);
 			});
 		});
 	});
