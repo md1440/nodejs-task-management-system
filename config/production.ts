@@ -6,7 +6,7 @@ dotenv.config({
 
 export default {
   address: '0.0.0.0',
-	port: 3000,
+	port: process.env.PORT,
 	dbUri: 'mongodb://localhost:27017/nodejs-task-management-system',
 	saltRounds: 12,
 	accessTokenTtl: '15m',
