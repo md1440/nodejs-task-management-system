@@ -61,3 +61,12 @@ export const taskPayload = {
 	dueDate: '2022-05-17T13:31:07.674Z',
 	reminderDate: '2022-05-16T13:31:07.674Z',
 };
+
+export const taskPayloadInvalid = {
+	user: userId,
+	title: 'finish optilyz backend coding challenge',
+	description:
+		'too short.',
+	dueDate: '2022-05-17T13:31:07.674Z',
+	reminderDate: '2022-05-16T13:31:07.674Z',
+};
