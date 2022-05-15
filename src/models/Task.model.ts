@@ -8,8 +8,8 @@ export interface TaskDocument extends mongoose.Document {
 	user: UserDocument['_id'];
 	title: string;
 	description: string;
-	duedate: Date;
-	reminderDate: Date;
+	dueDate: string | Date;
+	reminderDate: string | Date;
 	createdAt: Date;
 	updatedAt: Date;
 }
@@ -33,6 +33,18 @@ const taskSchema = new mongoose.Schema(
 		timestamps: true,
 	}
 );
+
+taskSchema.pre('save', async function (next) {
+	const task = this as TaskDocument;
+
+	const dueDate = new Date(String(task.dueDate));
+	const reminderDate = new Date(String(task.reminderDate));
+
+	task.dueDate = dueDate;
+	task.reminderDate = reminderDate;
+
+	return next();
+});
 
 const TaskModel = mongoose.model<TaskDocument>('Task', taskSchema);
 

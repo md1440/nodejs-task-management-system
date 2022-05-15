@@ -7,11 +7,11 @@ const payload = {
 		}),
 		description: string({
 			required_error: 'Description is required',
-		}).min(120, 'Description should be at least 120 characters long...'),
-		duedate: date({
+		}).min(80, 'Description should be at least 120 characters long...'),
+		dueDate: string({
 			required_error: 'Due date is required',
 		}),
-		reminderDate: date({
+		reminderDate: string({
 			required_error: 'Reminder date is required',
 		}),
 	}),
