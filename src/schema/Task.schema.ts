@@ -1,6 +1,6 @@
 import { date, object, string, TypeOf } from 'zod';
 
-const payload = {
+const payloadTaskCreate = {
 	body: object({
 		title: string({
 			required_error: 'Title is required',
@@ -17,6 +17,26 @@ const payload = {
 	}),
 };
 
+const payloadTaskUpdate = {
+	body: object({
+		title: string({
+			required_error: 'Title is required',
+		}),
+		description: string({
+			required_error: 'Description is required',
+		}).min(80, 'Description should be at least 120 characters long...'),
+		dueDate: string({
+			required_error: 'Due date is required',
+		}),
+		reminderDate: string({
+			required_error: 'Reminder date is required',
+		}),
+		isCompleted: string({
+			required_error: 'Task status true or false is required '
+		})
+	}),
+};
+
 const params = {
 	params: object({
 		taskId: string({
@@ -26,11 +46,11 @@ const params = {
 };
 
 export const createTaskSchema = object({
-	...payload,
+	...payloadTaskCreate,
 });
 
 export const updateTaskSchema = object({
-	...payload,
+	...payloadTaskUpdate,
 	...params,
 });
 

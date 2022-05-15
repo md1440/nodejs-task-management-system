@@ -5,7 +5,7 @@ import supertest from 'supertest';
 import { createTask } from '../service/task.service';
 import createServer from '../utils/createServer';
 import { signJwt } from '../utils/jwtUtils';
-import { taskPayload, taskPayloadInvalid, userPayload } from './_test_fixtures';
+import { taskPayload, taskPayloadInvalid, taskPayloadUpdate, userPayload } from './_test_fixtures';
 
 const app = createServer();
 
@@ -102,13 +102,13 @@ describe('Task End Point Tests', () => {
 		describe('given user is logged in and payload is valid', () => {
 			it('should return a 200 and update the task', async () => {
 				const jwt = signJwt(userPayload);
-				const task = await createTask(taskPayload);
+				const task = await createTask(taskPayloadUpdate);
 				const taskId = get(task, 'taskId');
 
 				const { statusCode, body } = await supertest(app)
 					.put(`/api/v1/tasks/${taskId}`)
 					.set('Authorization', `Bearer ${jwt}`)
-					.send(taskPayload);
+					.send(taskPayloadUpdate);
 
 				expect(statusCode).toBe(200);
 			});
