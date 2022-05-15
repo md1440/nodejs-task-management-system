@@ -23,3 +23,7 @@ export async function findAndUpdateTask(
 ) {
 	return TaskModel.findOneAndUpdate(query, update, options);
 }
+
+export async function deleteTask(query: FilterQuery<TaskDocument>) {
+	return TaskModel.deleteOne(query);
+}

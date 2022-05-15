@@ -1,6 +1,11 @@
 import { Request, Response } from 'express';
-import { CreateTaskInput, GetTaskInput, UpdateTaskInput } from '../schema/Task.schema';
-import { createTask, findAndUpdateTask, findTask } from '../service/task.service';
+import {
+	CreateTaskInput,
+	DeleteTaskInput,
+	GetTaskInput,
+	UpdateTaskInput,
+} from '../schema/Task.schema';
+import { createTask, deleteTask, findAndUpdateTask, findTask } from '../service/task.service';
 import logger from '../utils/logger';
 
 export async function createTaskHandler(
@@ -46,4 +51,23 @@ export async function updateTaskHandler(
 	const updateTask = await findAndUpdateTask({ taskId }, update, { new: true });
 
 	return res.send(updateTask);
+}
+
+export async function deleteTaskHandler(req: Request<DeleteTaskInput['params']>, res: Response) {
+	const userId = res.locals.user._id;
+	const taskId = req.params.taskId;
+
+	const task = await findTask({ taskId });
+
+	if (!task) {
+		return res.status(404).send('Task not found');
+	}
+
+	if (String(task.user) !== userId) {
+		return res.status(403).send('You are not the owner of this task');
+	}
+
+	await deleteTask({ taskId });
+
+	return res.sendStatus(200);
 }
