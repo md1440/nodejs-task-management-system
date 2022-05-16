@@ -19,6 +19,32 @@ import {
 import { createUserSchema } from './schema/User.schema';
 
 function routes(app: Express) {
+
+  /**
+   * @openapi
+   * '/api/v1/users':
+   *  post:
+   *     tags:
+   *     - User
+   *     summary: Register a user
+   *     requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/CreateUserInput'
+   *     responses:
+   *      200:
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/CreateUserResponse'
+   *      409:
+   *        description: Conflict
+   *      400:
+   *        description: Bad request
+   */
 	app.post(
 		'/api/v1/users', 
 		validateRequest(createUserSchema), 

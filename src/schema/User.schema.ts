@@ -21,3 +21,42 @@ export const createUserSchema = object({
 });
 
 export type CreateUserInput = Omit<TypeOf<typeof createUserSchema>, 'body.passwordConfirmation'>;
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    CreateUserInput:
+ *      type: object
+ *      required:
+ *        - email
+ *        - name
+ *        - password
+ *        - passwordConfirmation
+ *      properties:
+ *        email:
+ *          type: string
+ *          default: test@test.de
+ *        name:
+ *          type: string
+ *          default: Hans Mustermann
+ *        password:
+ *          type: string
+ *          default: asdf1234
+ *        passwordConfirmation:
+ *          type: string
+ *          default: asdf1234
+ *    CreateUserResponse:
+ *      type: object
+ *      properties:
+ *        email:
+ *          type: string
+ *        name:
+ *          type: string
+ *        _id:
+ *          type: string
+ *        createdAt:
+ *          type: string
+ *        updatedAt:
+ *          type: string
+ */
