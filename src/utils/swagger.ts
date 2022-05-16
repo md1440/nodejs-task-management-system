@@ -44,7 +44,7 @@ function swaggerDocs(app: Express, port: number, address: string) {
 	}
 
   if (process.env.NODE_ENV === 'production') {
-    log.info(`Api Docs available at http://rest-api-task-mgt.herokuapp.com/docs`)
+    log.info(`Api Docs available at https://rest-api-task-mgt.herokuapp.com/docs`)
 	}
 }
 

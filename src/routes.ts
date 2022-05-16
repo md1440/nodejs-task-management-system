@@ -69,6 +69,31 @@ function routes(app: Express) {
 		deleteSessionHandler
 	);
 
+	/**
+   * @openapi
+   * '/api/v1/tasks':
+   *  post:
+   *     tags:
+   *     - Task
+   *     summary: Create a new task
+   *     requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/CreateTaskInput'
+   *     responses:
+   *      200:
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/CreateTaskResponse'
+   *      403:
+   *        description: Forbidden
+   *      400:
+   *        description: Bad request
+   */
 	app.post(
 		'/api/v1/tasks', 
 		[requireUser, validateRequest(createTaskSchema)], 
@@ -93,7 +118,7 @@ function routes(app: Express) {
    *         content:
    *          application/json:
    *           schema:
-   *              $ref: '#/components/schema/Task'
+   *              $ref: '#/components/schema/GetTaskResponse'
    *       404:
    *         description: Task not found
    *       403:
