@@ -6,7 +6,7 @@ import {
 	UpdateTaskInput,
 } from '../schema/Task.schema';
 import { createTask, deleteTask, findAndUpdateTask, findTask } from '../service/task.service';
-import logger from '../utils/logger';
+import log from '../utils/logger';
 
 export async function createTaskHandler(
 	req: Request<{}, {}, CreateTaskInput['body']>,
@@ -19,7 +19,7 @@ export async function createTaskHandler(
 		const task = await createTask({ ...body, user: userId });
 		return res.send(task);
 	} catch (err: any) {
-		logger.error(err);
+		log.error(err);
 		res.status(403).send(err.message);
 	}
 }
