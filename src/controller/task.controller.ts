@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { omit } from 'lodash';
 import {
 	CreateTaskInput,
 	DeleteTaskInput,
@@ -30,7 +31,7 @@ export async function getTaskHandler(req: Request<GetTaskInput['params']>, res: 
 
 	if (!task) return res.status(404).send('Task not found');
 
-	return res.send(task);
+	return res.send(omit(task, ['_id', 'user', '__v']));
 }
 
 export async function updateTaskHandler(
