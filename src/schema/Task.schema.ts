@@ -1,5 +1,35 @@
 import { date, object, string, TypeOf } from 'zod';
 
+/**
+ * @openapi
+ * components:
+ *   schema:
+ *     Task:
+ *       type: object
+ *       required:
+ *        - title
+ *        - description
+ *        - dueDate
+ *        - reminderDate
+ *       properties:
+ *         title:
+ *           type: string
+ *         description:
+ *           type: string
+ *         dueDate:
+ *           type: string
+ *         reminderDate:
+ *           type: string
+ *         isCompleted:
+ *           type: string
+ *         taskId:
+ *           type: string
+ *         createdAt:
+ *           type: string
+ *         updatedAt:
+ *           type: string
+ */
+
 const payloadTaskCreate = {
 	body: object({
 		title: string({

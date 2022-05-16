@@ -75,6 +75,31 @@ function routes(app: Express) {
 		createTaskHandler
 	);
 
+	/**
+   * @openapi
+   * '/api/v1/tasks/{taskId}':
+   *  get:
+   *     tags:
+   *     - Tasks
+   *     summary: Get a single task by the taskId
+   *     parameters:
+   *      - name: taskId
+   *        in: path
+   *        description: the id of the task
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Success
+   *         content:
+   *          application/json:
+   *           schema:
+   *              $ref: '#/components/schema/Task'
+   *       404:
+   *         description: Task not found
+   *       403:
+   *         description: Forbidden
+	 
+   */
 	app.get(
 		'/api/v1/tasks/:taskId', 
 		[requireUser, validateRequest(getTaskSchema)], 
