@@ -23,6 +23,25 @@ import { object, string, TypeOf } from 'zod';
  *          type: string
  *        refreshToken:
  *          type: string
+ *    GetSessionResponse:
+ *      type: array
+ *      items:
+ *        type: object
+ *        properties:
+ *          _id:
+ *            type: string
+ *          user:
+ *            type: string
+ *          valid:
+ *            type: boolean
+ *          userAgent:
+ *            type: string
+ *          createdAt:
+ *            type: string
+ *          updatedAt:
+ *            type: string
+ *          __v:
+ *            type: string
  */
 
 export const createSessionSchema = object({

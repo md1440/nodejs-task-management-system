@@ -56,7 +56,7 @@ function routes(app: Express) {
    * '/api/v1/sessions':
    *  post:
    *     tags:
-   *     - User
+   *     - Sessions
    *     summary: Create a new session (login)
    *     requestBody:
    *      required: true
@@ -82,6 +82,23 @@ function routes(app: Express) {
 		createUserSessionHandler
 	);
 
+   /**
+   * @openapi
+   * '/api/v1/sessions':
+   *  get:
+   *     tags:
+   *     - Sessions
+   *     summary: Get valid sessions (login history)
+   *     responses:
+   *      200:
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/GetSessionResponse'
+   *      403:
+   *        description: Forbidden
+   */
 	app.get(
 		'/api/v1/sessions', 
 		requireUser, 
@@ -99,7 +116,7 @@ function routes(app: Express) {
    * '/api/v1/tasks':
    *  post:
    *     tags:
-   *     - Task
+   *     - Tasks
    *     summary: Create a new task
    *     requestBody:
    *      required: true
