@@ -177,7 +177,7 @@ function routes(app: Express) {
    *         content:
    *          application/json:
    *           schema:
-   *              $ref: '#/components/schema/GetTaskResponse'
+   *              $ref: '#/components/schemas/GetTaskResponse'
    *       404:
    *         description: Task not found
    *       403:
