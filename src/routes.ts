@@ -105,6 +105,23 @@ function routes(app: Express) {
 		getUserSessionHandler
 	);
 
+    /**
+   * @openapi
+   * '/api/v1/sessions':
+   *  delete:
+   *     tags:
+   *     - Sessions
+   *     summary: Delete a session (logout)
+   *     responses:
+   *      200:
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/DeleteSessionResponse'
+   *      403:
+   *        description: Forbidden
+   */
 	app.delete(
 		'/api/v1/sessions',
 		requireUser,
