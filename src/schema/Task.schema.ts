@@ -67,6 +67,49 @@ import { date, object, string, TypeOf } from 'zod';
  *           type: string
  *         updatedAt:
  *           type: string
+ *     UpdateTaskInput:
+ *       type: object
+ *       required:
+ *         - title
+ *         - description
+ *         - dueDate
+ *         - reminderDate
+ *         - isCompleted
+ *       properties:
+ *         title:
+ *           type: string
+ *         description:
+ *           type: string
+ *         dueDate:
+ *           type: string
+ *           default: 2022-05-23T13:31:07.674Z
+ *         reminderDate:
+ *           type: string
+ *           default: 2022-05-22T13:31:07.674Z
+ *         isCompleted:
+ *           type: boolean
+ *           default: false
+ *     UpdateTaskResponse:
+ *       type: object
+ *       properties:
+ *         title:
+ *           type: string
+ *         description:
+ *           type: string
+ *         dueDate:
+ *           type: string
+ *         reminderDate:
+ *           type: string
+ *         isCompleted:
+ *           type: string
+ *         _id:
+ *           type: string
+ *         taskId:
+ *           type: string
+ *         createdAt:
+ *           type: string
+ *         updatedAt:
+ *           type: string
  */
 
 const payloadTaskCreate = {

@@ -189,6 +189,40 @@ function routes(app: Express) {
 		getTaskHandler
 	);
 
+   /**
+   * @openapi
+   * '/api/v1/tasks/{taskId}':
+   *  put:
+   *     tags:
+   *     - Tasks
+   *     summary: Update an existing task by taskId
+   *     parameters:
+   *      - name: taskId
+   *        in: path
+   *        description: the id of the task
+   *        required: true
+   *     requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/UpdateTaskInput'
+   *     responses:
+   *      200:
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/UpdateTaskResponse'
+   *      403:
+   *        description: Forbidden
+   *      404:
+   *        description: Not found
+   *      409:
+   *        description: You are not the owner of this task
+   *      400:
+   *        description: Bad request
+   */
 	app.put(
 		'/api/v1/tasks/:taskId',
 		[requireUser, validateRequest(updateTaskSchema)],

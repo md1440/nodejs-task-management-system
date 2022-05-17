@@ -47,7 +47,7 @@ export async function updateTaskHandler(
 	if (!task) return res.status(404).send('Task not found');
 
 	if (String(task.user) !== userId)
-		return res.status(403).send('You are not the owner of this task');
+		return res.status(409).send('You are not the owner of this task');
 
 	const updateTask = await findAndUpdateTask({ taskId }, update, { new: true });
 
