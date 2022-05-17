@@ -45,11 +45,6 @@ import { date, object, string, TypeOf } from 'zod';
  *           type: string
  *     GetTaskResponse:
  *       type: object
- *       required:
- *        - title
- *        - description
- *        - dueDate
- *        - reminderDate
  *       properties:
  *         title:
  *           type: string
