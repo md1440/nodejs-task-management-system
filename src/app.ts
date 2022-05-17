@@ -1,4 +1,5 @@
 import config from 'config';
+import { startMetricsServer } from './utils/appmetrics';
 import createServer from './utils/createServer';
 import dbConnect, { dbConnectionEvents } from './utils/dbConnect';
 import log from './utils/logger';
@@ -16,5 +17,7 @@ app.listen(port, address, async () => {
 
 	await dbConnect();
 
-	swaggerDocs(app, port, address)
+	swaggerDocs(app, port, address);
+
+	startMetricsServer();
 });
