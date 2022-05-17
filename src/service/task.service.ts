@@ -1,19 +1,42 @@
 import { DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
 import TaskModel, { TaskDocument } from '../models/Task.model';
+import { databaseResponseTimeHistogram } from '../utils/appmetrics';
 
 export async function createTask(
 	input: DocumentDefinition<
 		Omit<TaskDocument, 'createdAt' | 'updatedAt' | 'taskId' | 'isCompleted'>
 	>
 ) {
-	return TaskModel.create(input);
+	const metricsLabels = { operation: 'createTask' };
+	const timer = databaseResponseTimeHistogram.startTimer();
+
+	try {
+		const result = TaskModel.create(input);
+		timer({ ...metricsLabels, success: 'true' });
+
+		return result;
+	} catch (err: any) {
+		timer({ ...metricsLabels, success: 'false' });
+		throw new Error(err.message);
+	}
 }
 
 export async function findTask(
 	query: FilterQuery<TaskDocument>,
 	options: QueryOptions = { lean: true }
 ) {
-	return TaskModel.findOne(query, {}, options);
+	const metricsLabels = { operation: 'findTask' };
+	const timer = databaseResponseTimeHistogram.startTimer();
+
+	try {
+		const result = TaskModel.findOne(query, {}, options);
+		timer({ ...metricsLabels, success: 'true' });
+
+		return result;
+	} catch (err: any) {
+		timer({ ...metricsLabels, success: 'false' });
+		throw new Error(err.message);
+	}
 }
 
 export async function findAndUpdateTask(
@@ -21,7 +44,18 @@ export async function findAndUpdateTask(
 	update: UpdateQuery<TaskDocument>,
 	options: QueryOptions
 ) {
-	return TaskModel.findOneAndUpdate(query, update, options);
+	const metricsLabels = { operation: 'findTask' };
+	const timer = databaseResponseTimeHistogram.startTimer();
+
+	try {
+		const result = TaskModel.findOneAndUpdate(query, update, options);
+		timer({ ...metricsLabels, success: 'true' });
+
+		return result;
+	} catch (err: any) {
+		timer({ ...metricsLabels, success: 'false' });
+		throw new Error(err.message);
+	}
 }
 
 export async function deleteTask(query: FilterQuery<TaskDocument>) {
