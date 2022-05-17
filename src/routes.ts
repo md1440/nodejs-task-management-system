@@ -229,6 +229,36 @@ function routes(app: Express) {
 		updateTaskHandler
 	);
 
+   /**
+   * @openapi
+   * '/api/v1/tasks/{taskId}':
+   *  delete:
+   *     tags:
+   *     - Tasks
+   *     summary: Delete a single task by the taskId
+   *     parameters:
+   *      - name: taskId
+   *        in: path
+   *        description: the id of the task
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: OK
+   *         content:
+   *          application/json:
+   *           schema:
+   *              type: string
+   *              example: OK
+   *       404:
+   *         description: Task not found
+   *         content:
+   *          application/json:
+   *           schema:
+   *              type: string
+   *              example: Task not found
+   *       403:
+   *         description: Forbidden
+   */
 	app.delete(
 		'/api/v1/tasks/:taskId',
 		[requireUser, validateRequest(deleteTaskSchema)],
