@@ -19,5 +19,7 @@ app.listen(port, address, async () => {
 
 	swaggerDocs(app, port, address);
 
-	startMetricsServer();
+	if (process.env.NODE_ENV === 'development') {
+		startMetricsServer();
+	}
 });
