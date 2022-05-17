@@ -32,6 +32,6 @@ export function startMetricsServer() {
 	});
 
 	app.listen(metricsServerPort, address, async () => {
-		log.info(`Metrics server running on ${metricsServerPort}`);
+		log.info(`Metrics server running on http://localhost:${metricsServerPort}/metrics`);
 	});
 }
