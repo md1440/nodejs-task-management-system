@@ -51,6 +51,31 @@ function routes(app: Express) {
 		createUserHandler
 	);
 
+   /**
+   * @openapi
+   * '/api/v1/sessions':
+   *  post:
+   *     tags:
+   *     - User
+   *     summary: Create a new session (login)
+   *     requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/CreateSessionInput'
+   *     responses:
+   *      200:
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/CreateSessionResponse'
+   *      401:
+   *        description: Invalid email or password
+   *      400:
+   *        description: Bad request
+   */
 	app.post(
 		'/api/v1/sessions', 
 		validateRequest(createSessionSchema), 
@@ -123,7 +148,6 @@ function routes(app: Express) {
    *         description: Task not found
    *       403:
    *         description: Forbidden
-	 
    */
 	app.get(
 		'/api/v1/tasks/:taskId', 
