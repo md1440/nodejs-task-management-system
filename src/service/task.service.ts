@@ -1,42 +1,24 @@
 import { DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
 import TaskModel, { TaskDocument } from '../models/Task.model';
-import { databaseResponseTimeHistogram } from '../utils/appmetrics';
+import { databaseResponseTimeHistogram, withTimer } from '../utils/appmetrics';
 
 export async function createTask(
 	input: DocumentDefinition<
 		Omit<TaskDocument, 'createdAt' | 'updatedAt' | 'taskId' | 'isCompleted'>
 	>
 ) {
-	const metricsLabels = { operation: 'createTask' };
-	const timer = databaseResponseTimeHistogram.startTimer();
-
-	try {
-		const result = TaskModel.create(input);
-		timer({ ...metricsLabels, success: 'true' });
-
-		return result;
-	} catch (err: any) {
-		timer({ ...metricsLabels, success: 'false' });
-		throw new Error(err.message);
-	}
+	return withTimer('createTask',
+        () => TaskModel.create(input)
+    );
 }
 
 export async function findTask(
 	query: FilterQuery<TaskDocument>,
 	options: QueryOptions = { lean: true }
 ) {
-	const metricsLabels = { operation: 'findTask' };
-	const timer = databaseResponseTimeHistogram.startTimer();
-
-	try {
-		const result = TaskModel.findOne(query, {}, options);
-		timer({ ...metricsLabels, success: 'true' });
-
-		return result;
-	} catch (err: any) {
-		timer({ ...metricsLabels, success: 'false' });
-		throw new Error(err.message);
-	}
+	return withTimer('findTask',
+        () => TaskModel.findOne(query, {}, options)
+    );
 }
 
 export async function findAndUpdateTask(
@@ -44,18 +26,9 @@ export async function findAndUpdateTask(
 	update: UpdateQuery<TaskDocument>,
 	options: QueryOptions
 ) {
-	const metricsLabels = { operation: 'findTask' };
-	const timer = databaseResponseTimeHistogram.startTimer();
-
-	try {
-		const result = TaskModel.findOneAndUpdate(query, update, options);
-		timer({ ...metricsLabels, success: 'true' });
-
-		return result;
-	} catch (err: any) {
-		timer({ ...metricsLabels, success: 'false' });
-		throw new Error(err.message);
-	}
+	return withTimer('findTask',
+        () => TaskModel.findOneAndUpdate(query, update, options)
+    );
 }
 
 export async function deleteTask(query: FilterQuery<TaskDocument>) {

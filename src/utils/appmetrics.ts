@@ -1,5 +1,6 @@
 import config from 'config';
 import express, { Request, Response } from 'express';
+import { DocumentDefinition } from 'mongoose';
 import client from 'prom-client';
 import log from './logger';
 
@@ -34,4 +35,20 @@ export function startMetricsServer() {
 	app.listen(metricsServerPort, address, async () => {
 		log.info(`Metrics server running on http://localhost:${metricsServerPort}/metrics`);
 	});
+}
+export type metricLabelsService = 'createTask' | 'findTask';
+
+export function withTimer (label: metricLabelsService, operation: any) {
+	const metricsLabels = { operation: label };
+	const timer = databaseResponseTimeHistogram.startTimer();
+
+	try {
+			const result = operation();
+			timer({ ...metricsLabels, success: 'true' });
+
+			return result;
+	} catch (err: any) {
+			timer({ ...metricsLabels, success: 'false' });
+			throw new Error(err.message);
+	}
 }
